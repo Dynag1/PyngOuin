@@ -17,6 +17,8 @@ import os
 import sys
 import importlib.util
 
+from fichier import lic
+
 
 def logs(log):
     logging.config.fileConfig('fichier/logger.ini', disable_existing_loggers=False)
@@ -296,9 +298,12 @@ def create_menu(fenetre, frame_haut):
 
     menu2 = Menu(menubar, tearoff=0)
     menu2.add_command(label=_("Général"), command=paramGene)
-    menu2.add_command(label=_("Envoies"), command=paramMail)
-    menu2.add_command(label=_("Mail Recap"), command=paramMailRecap)
-    menu2.add_command(label=_("DB"), command=paramDb)
+
+
+    if lic.verify_license():
+        menu2.add_command(label=_("Envoies"), command=paramMail)
+        menu2.add_command(label=_("Mail Recap"), command=paramMailRecap)
+        menu2.add_command(label=_("DB"), command=paramDb)
     menubar.add_cascade(label=_("Paramètres"), menu=menu2)
 
     menu4 = Menu(menubar, tearoff=0)

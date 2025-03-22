@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from fichier import design, var, fct_ip, fct_ping, param_gene, Thread_aj_ip, fct_main, param_db_quit, fct_suivi, fct_graph
+from fichier import design, var, fct_ip, fct_ping, param_gene, Thread_aj_ip, fct_main, param_db_quit, fct_suivi, fct_graph, lic
 import gettext
 import os
 import psutil
@@ -58,12 +58,10 @@ class main:
         self.get_lang()
         ### Gestion des Plugins
         self.plug()
-        a = uuid.getnode()
-        if var.li(a) == True:
-            var.b = True
-        else:
-            pass
-            # design.alert("Vous n'avez pas de licence valide")
+
+
+
+
 
         self.check_popup1 = IntVar()
         self.check_mail1 = IntVar()
@@ -72,7 +70,7 @@ class main:
         self.check_port1 = IntVar()
         self.check_telegram1 = IntVar()
         self.check_db1 = IntVar()
-
+        lic.verify_license()
         try:
             self.maj()
         except Exception as e:
@@ -102,6 +100,14 @@ class main:
         self.lab_version.grid(row=0, column=1, padx=5, pady=5)
         self.lab_touvert = Label(master=self.frame_bas, bg=var.bg_frame_haut, text="")
         self.lab_touvert.grid(row=0, column=2, padx=5, pady=5)
+        if lic.verify_license():
+            self.lab_lic = Label(master=self.frame_bas, bg=var.bg_frame_haut,
+                                     text=_("Votre licence est active"))
+            self.lab_lic.grid(row=0, column=10, padx=5, pady=5)
+        else:
+            self.lab_lic = Label(master=self.frame_bas, bg=var.bg_frame_haut,
+                                 text=_("Vous n'avez pas de licence active"))
+            self.lab_lic.grid(row=0, column=10, padx=5, pady=5)
 
         ###################################################################################################################
         ###### Frame haut 																							 ######
@@ -191,6 +197,8 @@ class main:
         self.tab_ip.bind('<ButtonRelease-1>', self.item_selected)
         self.tab_ip.bind('<3>', self.right_clic)
         self.tab_ip.pack(expand=YES, fill=BOTH)
+        self.tab_ip.bind("<Double-Button-1>", self.on_double_click)
+
 
         ### Frame Droit
 
@@ -254,6 +262,13 @@ class main:
                                bg="#FFFFFF",
                                command=self.isCheckedDb)
         self.check_db.grid(row=7, columnspan=3, padx=0, pady=5, sticky='w')
+
+        if lic.verify_license() == False:
+            self.check_popup.config(state=DISABLED)
+            self.check_mail.config(state=DISABLED)
+            self.check_telegram.config(state=DISABLED)
+            self.check_recap.config(state=DISABLED)
+            self.check_db.config(state=DISABLED)
 
         ########### Effacer #########################################
         self.frametab1 = Frame(master=self.frame3, bg=var.bg_frame_droit, padx=5, pady=5, width=180, height=20, relief=SUNKEN)
@@ -425,6 +440,16 @@ class main:
     def open_nav(self, ip):
         webbrowser.open('http://' + ip)
 
+    def on_double_click(self, event):
+        # Votre code ici
+        print("Double-clic détecté !")
+        selected_item = self.tab_ip.selection()
+        result = self.tab_ip.item(selected_item)["values"]
+        try:
+            ip = result[0]
+            self.open_nav(ip)
+        except Exception as e:
+            print(e)
 
     def right_clic(self, event):
         # create a popup menu

@@ -1,11 +1,8 @@
 import uuid
 from tkinter import *
-from tkinter import ttk
-import fichier.var as var
-import fichier.design as design
+from fichier import var, design, lic
 import pickle
 import os.path
-import threading
 
 fichierini = "tabG"
 """
@@ -17,6 +14,7 @@ popup = False
 mail = False
 recap = False
 """
+licence = ""
 def lire_param_gene():
 	try:
 		if os.path.isfile(fichierini):
@@ -45,6 +43,7 @@ def nom_site():
 
 
 def main():
+
 	def save_param_gene():
 		param_site = ent0.get()
 		param_li = ent2.get()
@@ -60,9 +59,9 @@ def main():
 	def lire():
 		try:
 			variables=lire_param_gene()
-
+			licence = variables[1]
 			ent0.insert(0, variables[0])
-			ent1.insert(0, uuid.getnode())
+			#ent1.insert(0, variables[1])
 			ent2.insert(0, variables[1])
 
 		except Exception as inst:
@@ -79,17 +78,22 @@ def main():
 	ent0 = Entry(frame_haut, text="")
 	ent0.grid(row=0, column=1, padx=5, pady=5, sticky = 'w')
 
+	var.code = lic.generate_activation_code()
+	print(var.code)
 	lab1 = Label(master=frame_haut, text=_("Code"), bg=var.bg_frame_mid).grid(row=1, column=0, padx=5, pady=5,
 																				  sticky='w')
 	ent1 = Entry(frame_haut, text="")
 	ent1.grid(row=1, column=1, padx=5, pady=5, sticky='w')
+	ent1.insert(0, var.code)
 
 	lab2 = Label(master=frame_haut, text=_("Licence"), bg=var.bg_frame_mid).grid(row=2, column=0, padx=5, pady=5,
 																				  sticky='w')
 	ent2 = Entry(frame_haut, text="")
 	ent2.grid(row=2, column=1, padx=5, pady=5, sticky='w')
 
-	if var.b == True:
+	print(lic.verify_license())
+
+	if lic.verify_license() == True:
 		Licence = _("Licence Valide")
 	else:
 		Licence = _("Licence Non Valide")
