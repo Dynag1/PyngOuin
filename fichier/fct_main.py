@@ -8,8 +8,8 @@ import psutil
 import fichier.var as var
 
 def plug():
-    for filename in os.listdir("plugin"):
-        full_filename = os.path.join("plugin", filename)
+    for filename in os.listdir("../plugin"):
+        full_filename = os.path.join("../plugin", filename)
         if os.path.isdir(full_filename):
             var.plugIn.append(filename)
 

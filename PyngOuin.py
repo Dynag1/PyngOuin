@@ -47,7 +47,7 @@ class main:
         self.fenetre.geometry("910x600")
         self.fenetre.minsize(width=910, height=600)
 
-        img = tk.PhotoImage(file='fichier/logoP.png')
+        img = tk.PhotoImage(file='logoP.png')
 
         self.fenetre.iconphoto(False, img)
         fct_main.creerDossier("bd")
@@ -112,7 +112,7 @@ class main:
         ###################################################################################################################
         ###### Frame haut 																							 ######
         ###################################################################################################################
-        self.img = Image.open("fichier/logoP.png")
+        self.img = Image.open("logoP.png")
         self.img = self.img.resize((65, 65), Image.LANCZOS)
         self.img = ImageTk.PhotoImage(self.img)
         self.panel = Label(self.frame_haut, image=self.img, height=65, width=65, bg=var.bg_frame_haut)
@@ -296,6 +296,8 @@ class main:
         except:
             gettext.install('PyngOuin')
             print("error")
+
+
     def plugin(name):
         result = 0
         try:
@@ -307,15 +309,18 @@ class main:
         return result
 
     def plug(self):
-        for filename in os.listdir("fichier/plugin"):
-            full_filename = os.path.join("fichier/plugin", filename)
+        for filename in os.listdir("plugin"):
+            full_filename = os.path.join("plugin", filename)
+            print(full_filename)
             if os.path.isdir(full_filename):
                 var.plugIn.append(filename)
+        print(var.plugIn)
 
 
 
 
     def maj(self):
+        print("debut MAJ 1")
         import fichier.thread_maj as maj1
         threading.Thread(target=maj1.main(), args=()).start()
 

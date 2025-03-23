@@ -195,7 +195,7 @@ def pluginGest():
     try:
         import os
         import subprocess
-        path = os.path.abspath(os.getcwd())+"\\fichier\\plugin"
+        path = os.path.abspath(os.getcwd())+"\\plugin"
         FILEBROWSER_PATH = os.path.join(os.getenv('WINDIR'), 'explorer.exe')
         path = os.path.normpath(path)
         if os.path.isdir(path):
@@ -228,9 +228,12 @@ def plugIn(plugin_name):
     print(f"Tentative de chargement du plugin : {plugin_name}")
     try:
         # Configuration du chemin vers le dossier des plugins (au même niveau que l'exécutable principal)
-        base_dir = os.path.dirname(os.path.abspath(__file__))  # Répertoire contenant main.py
+        chemin_main = os.path.abspath('main.py')
+        base_dir = os.path.dirname(chemin_main)  # Répertoire contenant main.py
+        #base_dir = os.path.dirname(os.path.abspath(__file__))  # Répertoire contenant main.py
+        print(base_dir)
         plugin_root = os.path.join(base_dir, 'plugin')  # Dossier plugin au même niveau
-
+        print(plugin_root)
         # Vérification que le dossier 'plugin' existe
         if not os.path.exists(plugin_root):
             raise FileNotFoundError(f"Le dossier 'plugin' est introuvable : {plugin_root}")
