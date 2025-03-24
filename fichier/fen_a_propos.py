@@ -6,6 +6,7 @@ from tkinter import ttk, Toplevel
 import traceback
 
 import urllib3
+import xmltodict
 
 import fichier.var as var
 import fichier.design as design

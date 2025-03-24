@@ -3,14 +3,8 @@ import threading
 from tkinter import *
 from tkinter.messagebox import *
 from tkinter import messagebox, filedialog
-import fichier.param_mail as param_mail
+from fichier import param_mail, param_gene, param_db, param_mail_recap, var, thread_xls, fct_ping
 import fichier.param_db_quit as db_quit
-import fichier.param_gene as param_gene
-import fichier.param_db as param_db
-import fichier.param_mail_recap as param_mail_recap
-import fichier.var as var
-import fichier.thread_xls as thread_xls
-import fichier.fct_ping as fct_ping
 import logging.config
 import logging
 import os
@@ -195,7 +189,7 @@ def pluginGest():
     try:
         import os
         import subprocess
-        path = os.path.abspath(os.getcwd())+"\\plugin"
+        path = os.path.abspath(os.getcwd())+"\\fichier\\plugin"
         FILEBROWSER_PATH = os.path.join(os.getenv('WINDIR'), 'explorer.exe')
         path = os.path.normpath(path)
         if os.path.isdir(path):
@@ -226,54 +220,51 @@ def plugIn(plugin_name):
     :param plugin_name: Nom du plugin à charger (doit correspondre au nom du dossier dans 'plugin/')
     """
     print(f"Tentative de chargement du plugin : {plugin_name}")
-    try:
-        # Configuration du chemin vers le dossier des plugins (au même niveau que l'exécutable principal)
-        chemin_main = os.path.abspath('main.py')
-        base_dir = os.path.dirname(chemin_main)  # Répertoire contenant main.py
-        #base_dir = os.path.dirname(os.path.abspath(__file__))  # Répertoire contenant main.py
-        print(base_dir)
-        plugin_root = os.path.join(base_dir, 'plugin')  # Dossier plugin au même niveau
-        print(plugin_root)
-        # Vérification que le dossier 'plugin' existe
-        if not os.path.exists(plugin_root):
-            raise FileNotFoundError(f"Le dossier 'plugin' est introuvable : {plugin_root}")
+    #try:
+    # Configuration du chemin vers le dossier des plugins (au même niveau que l'exécutable principal)
+    base_dir = os.path.dirname(os.path.abspath(__file__))  # Répertoire contenant main.py
+    plugin_root = os.path.join(base_dir, 'plugin')  # Dossier plugin au même niveau
 
-        # Ajout du dossier 'plugin' au PYTHONPATH si nécessaire
-        if plugin_root not in sys.path:
-            sys.path.insert(0, plugin_root)
+    # Vérification que le dossier 'plugin' existe
+    if not os.path.exists(plugin_root):
+        raise FileNotFoundError(f"Le dossier 'plugin' est introuvable : {plugin_root}")
 
-        # Construction du chemin complet vers le fichier main.py du plugin
-        plugin_dir = os.path.join(plugin_root, plugin_name)
-        full_path_to_module = os.path.join(plugin_dir, 'main.py')
+    # Ajout du dossier 'plugin' au PYTHONPATH si nécessaire
+    if plugin_root not in sys.path:
+        sys.path.insert(0, plugin_root)
 
-        if not os.path.exists(full_path_to_module):
-            raise FileNotFoundError(f"Le fichier main.py est introuvable dans le dossier : {plugin_dir}")
+    # Construction du chemin complet vers le fichier main.py du plugin
+    plugin_dir = os.path.join(plugin_root, plugin_name)
+    full_path_to_module = os.path.join(plugin_dir, 'main.py')
 
-        print(f"Chemin du module détecté : {full_path_to_module}")
+    if not os.path.exists(full_path_to_module):
+        raise FileNotFoundError(f"Le fichier main.py est introuvable dans le dossier : {plugin_dir}")
 
-        # Génération d'un nom unique pour le module
-        module_name = f"plugin_{plugin_name}_main"
+    print(f"Chemin du module détecté : {full_path_to_module}")
 
-        # Chargement dynamique du module
-        spec = importlib.util.spec_from_file_location(module_name, full_path_to_module)
-        if spec is None:
-            raise ImportError("Impossible de créer la spécification du module.")
+    # Génération d'un nom unique pour le module
+    module_name = f"plugin_{plugin_name}_main"
 
-        module = importlib.util.module_from_spec(spec)
-        sys.modules[module_name] = module  # Nécessaire pour les imports relatifs dans le plugin
-        spec.loader.exec_module(module)
+    # Chargement dynamique du module
+    spec = importlib.util.spec_from_file_location(module_name, full_path_to_module)
+    if spec is None:
+        raise ImportError("Impossible de créer la spécification du module.")
 
-        # Vérification et exécution de la fonction main() du plugin
-        if hasattr(module, 'main'):
-            print(f"Exécution de la fonction main() du plugin {plugin_name}")
-            module.main()
-        else:
-            raise AttributeError(f"La fonction main() est introuvable dans le module {module_name}.")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[module_name] = module  # Nécessaire pour les imports relatifs dans le plugin
+    spec.loader.exec_module(module)
 
-    except Exception as e:
+    # Vérification et exécution de la fonction main() du plugin
+    if hasattr(module, 'main'):
+        print(f"Exécution de la fonction main() du plugin {plugin_name}")
+        module.main()
+    else:
+        raise AttributeError(f"La fonction main() est introuvable dans le module {module_name}.")
+
+    """except Exception as e:
         error_message = f"Erreur lors du chargement ou de l'exécution du plugin '{plugin_name}': {str(e)}"
         print(error_message)
-        logs(error_message)
+        logs(error_message)"""
 
 
 """def pluginSnyf():
@@ -295,7 +286,7 @@ def create_menu(fenetre, frame_haut):
     menu1.add_command(label=_("Charger"), command=load_csv)
     menu1.add_command(label=_("Tout effacer"), command=tab_erase)
     menu1.add_separator()
-    menu1.add_command(label=_("Test"), command=test)
+    #menu1.add_command(label=_("Test"), command=test)
     menu1.add_command(label=_("Sauvegarder les réglages"), command=quit_db)
     menubar.add_cascade(label=_("Fichier"), menu=menu1)
 

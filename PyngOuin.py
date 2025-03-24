@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 from fichier import design, var, fct_ip, fct_ping, param_gene, Thread_aj_ip, fct_main, param_db_quit, fct_suivi, fct_graph, lic
 import gettext
 import os
 import psutil
 import threading
 from tkinter import *
-import uuid
 import tkinter as tk
 from tkinter import ttk
 import math
@@ -47,11 +47,12 @@ class main:
         self.fenetre.geometry("910x600")
         self.fenetre.minsize(width=910, height=600)
 
-        img = tk.PhotoImage(file='logoP.png')
+        """img = tk.PhotoImage(file='logoP.png')
 
-        self.fenetre.iconphoto(False, img)
+        self.fenetre.iconphoto(False, img)"""
         fct_main.creerDossier("bd")
-        fct_main.creerDossier("plugin")
+        fct_main.creerDossier("fichier")
+        fct_main.creerDossier("fichier/plugin")
         self.lireParam()
         var.nom_site = param_gene.nom_site()
         ip_pc = fct_ip.recup_ip()
@@ -100,7 +101,7 @@ class main:
         self.lab_version.grid(row=0, column=1, padx=5, pady=5)
         self.lab_touvert = Label(master=self.frame_bas, bg=var.bg_frame_haut, text="")
         self.lab_touvert.grid(row=0, column=2, padx=5, pady=5)
-        if lic.verify_license():
+        if lic.verify_license() == True:
             self.lab_lic = Label(master=self.frame_bas, bg=var.bg_frame_haut,
                                      text=_("Votre licence est active"))
             self.lab_lic.grid(row=0, column=10, padx=5, pady=5)
@@ -301,7 +302,7 @@ class main:
     def plugin(name):
         result = 0
         try:
-            file=open("plugin/"+name+"/main.py")
+            file=open("fichir/plugin/"+name+"/main.py")
             result = True
             file.close()
         except:
@@ -309,8 +310,8 @@ class main:
         return result
 
     def plug(self):
-        for filename in os.listdir("plugin"):
-            full_filename = os.path.join("plugin", filename)
+        for filename in os.listdir("fichier/plugin"):
+            full_filename = os.path.join("fichier/plugin", filename)
             print(full_filename)
             if os.path.isdir(full_filename):
                 var.plugIn.append(filename)
