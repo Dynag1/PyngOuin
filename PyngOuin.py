@@ -14,13 +14,11 @@ import webbrowser
 from tkinter.messagebox import *
 from PIL import ImageTk, Image
 
-
 def queu():
     while True:
         #time.sleep(.01)
         try:
             try:
-                print(var.q.qsize())
                 f = var.q.get()
                 f()
                 if f is None:
@@ -46,10 +44,6 @@ class main:
         self.fenetre.title("PyngOuin")
         self.fenetre.geometry("910x600")
         self.fenetre.minsize(width=910, height=600)
-
-        """img = tk.PhotoImage(file='logoP.png')
-
-        self.fenetre.iconphoto(False, img)"""
         fct_main.creerDossier("bd")
         fct_main.creerDossier("fichier")
         fct_main.creerDossier("fichier/plugin")
@@ -57,13 +51,7 @@ class main:
         var.nom_site = param_gene.nom_site()
         ip_pc = fct_ip.recup_ip()
         self.get_lang()
-        ### Gestion des Plugins
         self.plug()
-
-
-
-
-
         self.check_popup1 = IntVar()
         self.check_mail1 = IntVar()
         self.check_recap1 = IntVar()
@@ -77,7 +65,6 @@ class main:
         except Exception as e:
             design.logs("MAJ - " + str(e))
             pass
-
         threading.Thread(target=queu, args=()).start()
         # threading.Thread(target=threado, args=()).start()
         ###################################################################################################################
@@ -103,7 +90,7 @@ class main:
         self.lab_touvert.grid(row=0, column=2, padx=5, pady=5)
         if lic.verify_license() == True:
             self.lab_lic = Label(master=self.frame_bas, bg=var.bg_frame_haut,
-                                     text=_("Votre licence est active"))
+                                     text=_("Votre licence est active, il vous reste "+lic.jours_restants_licence()+" jours"))
             self.lab_lic.grid(row=0, column=10, padx=5, pady=5)
         else:
             self.lab_lic = Label(master=self.frame_bas, bg=var.bg_frame_haut,
@@ -289,11 +276,11 @@ class main:
 
     def get_lang(self):
         try:
-            #var.langue = db.tab_param_lire("langue")
+            langue = param_gene.lang()
+            var.langue = langue
             gettext.find("PyngOuin")
             traduction = gettext.translation(var.langue, localedir='fichier/locale', languages=[var.langue])
             traduction.install()
-            print(var.langue)
         except:
             gettext.install('PyngOuin')
             print("error")
@@ -312,16 +299,12 @@ class main:
     def plug(self):
         for filename in os.listdir("fichier/plugin"):
             full_filename = os.path.join("fichier/plugin", filename)
-            print(full_filename)
             if os.path.isdir(full_filename):
                 var.plugIn.append(filename)
-        print(var.plugIn)
-
 
 
 
     def maj(self):
-        print("debut MAJ 1")
         import fichier.thread_maj as maj1
         threading.Thread(target=maj1.main(), args=()).start()
 
@@ -423,7 +406,6 @@ class main:
         fct_ping.stopping(self.frame_haut)
         nbr = self.spin_test.get()
         var.envoie_alert = nbr
-        print(var.envoie_alert)
 
 
     ###### Sélection d'une ligne
@@ -447,8 +429,6 @@ class main:
         webbrowser.open('http://' + ip)
 
     def on_double_click(self, event):
-        # Votre code ici
-        print("Double-clic détecté !")
         selected_item = self.tab_ip.selection()
         result = self.tab_ip.item(selected_item)["values"]
         try:

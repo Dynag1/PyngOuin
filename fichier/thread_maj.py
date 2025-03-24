@@ -43,10 +43,9 @@ def testVersion():
     version = recupDerVer()
     versionlog = var.version.split(".")
     versionlog1 = versionlog[0] + versionlog[1] + versionlog[2]
-    print(version+" - "+versionlog1)
+    message = _('Une mise à jour vers la version ') + str(version) + _(' est disponible. \n Voulez vous la télécharger ?')
     if int(versionlog1) < int(version):
-        val = design.question_box('Mise à jour', 'Une mise à jour vers la version ' + str(
-            version) + ' est disponible. \n Voulez vous la télécharger ?')
+        val = design.question_box(_('Mise à jour'), message)
         if val == True:
             webbrowser.open(var.site + '/PyngOuin/PyngOuin%20Setup.exe')
             for process in (process for process in psutil.process_iter() if
@@ -62,4 +61,3 @@ def main():
         testVersion()
     except:
         pass
-    #threading.currentThread().join()

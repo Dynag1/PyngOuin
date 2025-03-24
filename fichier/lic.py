@@ -20,9 +20,7 @@ def lire_param_gene():
             #Affichage de la liste
             lic = variables[1]
             return lic
-        else:
-            #Le fichier n'existe pas
-            print("Fichier  non trouvé")
+
     except Exception as inst:
         design.logs("param_gene - "+str(inst))
 
@@ -32,6 +30,28 @@ def generate_activation_code():
     hashed = hashlib.sha256(machine_info.encode()).hexdigest()
     return f"ACT-{hashed[:16]}-{datetime.now().strftime('%y%m')}"
 
+
+def jours_restants_licence():
+    """Affiche le nombre de jours restants avant expiration de la licence"""
+    from datetime import datetime
+    license_key = lire_param_gene()
+
+    try:
+        if not license_key.startswith("LIC-") or len(license_key) != 45:
+            return "Licence invalide"
+
+        expiry_str = license_key.split('-')[1]
+        expiry_date = datetime.strptime(expiry_str, "%Y%m%d")
+        aujourdhui = datetime.now()
+
+        if aujourdhui > expiry_date:
+            return "Licence expirée"
+
+        jours_restants = (expiry_date - aujourdhui).days
+        return f"{jours_restants}"
+
+    except Exception as e:
+        return f"Erreur de lecture : {str(e)}"
 
 def verify_license():
     """Vérifie si une licence est valide"""
@@ -43,7 +63,6 @@ def verify_license():
 
     try:
         if not license_key.startswith("LIC-") or len(license_key) != 45:
-            print("Format de licence invalide")
             return False
 
 

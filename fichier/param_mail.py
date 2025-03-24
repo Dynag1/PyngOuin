@@ -53,7 +53,6 @@ def main():
 		except Exception as inst:
 			design.logs(inst)
 			return
-	print('parammail')
 	fenetre1 = Toplevel()
 	fenetre1.title("Paramètres")
 	fenetre1.geometry("400x400")

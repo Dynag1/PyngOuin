@@ -4,7 +4,7 @@ from tkinter import *
 from tkinter import ttk
 from queue import Queue
 
-version = "2.2.4"
+version = "2.2.5"
 site = 'http://prog.dynag.co'
 ###########   Couleurs ##########
 bg_frame_haut = "#81BEF7"
@@ -13,7 +13,7 @@ bg_frame_droit = "#A9D0F5"
 bg_but = "#81BEF7"
 app_instance = ""
 q = Queue()
-langue = "fr"
+langue = ""
 liste_maj = {}
 code = ""
 
@@ -78,16 +78,3 @@ timeTest = 3
 
 plugIn = []
 plugTempVal = 50
-
-def li(a):
-    c = a+5874632589
-    c = c*54
-    c = hashlib.sha256(str(c).encode()).hexdigest()
-    print(l)
-    print(c)
-    if str(c) == str(l):
-        print("LI OK")
-        return True
-    else:
-        print("LI NONOK")
-        return False

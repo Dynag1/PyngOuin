@@ -32,7 +32,6 @@ def saveExcel():
     x = 2
     for parent in var.app_instance.tab_ip.get_children():
         result = var.app_instance.tab_ip.item(parent)["values"]
-        print(result)
         try:
             resultComm = result[6]
         except:
@@ -43,7 +42,6 @@ def saveExcel():
         sheet["D" + str(x)] = str(result[3])
         sheet["E" + str(x)] = str(result[4])
         sheet["F" + str(x)] = str(resultComm)
-        print(str(result[0]))
         x = x + 1
     workbook.save(filename=name + ".xlsx")
     threading.Thread(target=design.alert, args=("Votre fichier excel à bien été crée",)).start()

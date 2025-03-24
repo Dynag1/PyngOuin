@@ -47,6 +47,5 @@ def creerDossier(nom):
     dossier = Path(chemin_dossier)
     if not dossier.exists():
         dossier.mkdir(parents=True, exist_ok=True)
-        print("Le dossier a été créé avec succès")
     else:
-        print("Le dossier existe déjà")
+        pass

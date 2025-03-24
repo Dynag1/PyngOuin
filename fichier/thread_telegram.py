@@ -24,7 +24,6 @@ def send_telegram_message(message, chat_id):
                  'parse_mode': 'HTML',
                  'disable_notification': False}
     data = json.dumps(data_dict)
-    print(data_dict)
     url = f'https://api.telegram.org/bot{api}/sendMessage'
     try:
         responses = requests.post(url,
@@ -36,6 +35,5 @@ def send_telegram_message(message, chat_id):
         design.logs("telegram-"+str(inst))
         responses = "un problème est survenu"
         pass
-    print(responses)
     return responses
 

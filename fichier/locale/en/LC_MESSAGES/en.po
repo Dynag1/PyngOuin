@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PyngOuin\n"
-"POT-Creation-Date: 2025-03-03 10:47+0100\n"
-"PO-Revision-Date: 2025-03-03 10:47+0100\n"
+"POT-Creation-Date: 2025-03-24 16:23+0100\n"
+"PO-Revision-Date: 2025-03-24 16:24+0100\n"
 "Last-Translator: \n"
 "Language-Team: Hemgé\n"
 "Language: en\n"
@@ -14,184 +14,188 @@ msgstr ""
 "X-Poedit-SearchPath-0: fichier\n"
 "X-Poedit-SearchPath-1: PyngOuin.py\n"
 
-#: PyngOuin.py:106
+#: PyngOuin.py:87
 msgid "PyngOuin version :"
 msgstr "PyngOuin version:"
 
-#: PyngOuin.py:152 PyngOuin.py:182 PyngOuin.py:188
+#: PyngOuin.py:93
+msgid "Votre licence est active"
+msgstr "Your license is active"
+
+#: PyngOuin.py:97
+msgid "Vous n'avez pas de licence active"
+msgstr "You do not have an active license"
+
+#: PyngOuin.py:141 PyngOuin.py:171 PyngOuin.py:177
 msgid "IP"
 msgstr "IP"
 
-#: PyngOuin.py:157
+#: PyngOuin.py:146
 msgid "Nombre d'hotes"
 msgstr "Number of hosts"
 
-#: PyngOuin.py:168
+#: PyngOuin.py:157
 msgid "Ports (xx,xx)"
 msgstr "Ports (xx,xx)"
 
-#: PyngOuin.py:173 fichier/param_db.py:81 fichier/param_gene.py:99
-#: fichier/param_mail.py:88 fichier/param_mail_recap.py:116
+#: PyngOuin.py:162 fichier/param_db.py:81 fichier/param_gene.py:119
+#: fichier/param_mail.py:87 fichier/param_mail_recap.py:114
 msgid "Valider"
 msgstr "Confirm"
 
-#: PyngOuin.py:182 PyngOuin.py:189 PyngOuin.py:476
+#: PyngOuin.py:171 PyngOuin.py:178 PyngOuin.py:482
 msgid "Nom"
 msgstr "Name"
 
-#: PyngOuin.py:182 PyngOuin.py:190
+#: PyngOuin.py:171 PyngOuin.py:179
 msgid "mac"
 msgstr "Mac"
 
-#: PyngOuin.py:182 PyngOuin.py:191
+#: PyngOuin.py:171 PyngOuin.py:180
 msgid "port"
 msgstr "Port"
 
-#: PyngOuin.py:182 PyngOuin.py:192 fichier/fct_ping.py:147
+#: PyngOuin.py:171 PyngOuin.py:181 fichier/fct_ping.py:147
 msgid "Latence"
 msgstr "Latency"
 
-#: PyngOuin.py:182 PyngOuin.py:193
+#: PyngOuin.py:171 PyngOuin.py:182
 msgid "Suivi"
 msgstr "Follow"
 
-#: PyngOuin.py:182 PyngOuin.py:194 PyngOuin.py:477
+#: PyngOuin.py:171 PyngOuin.py:183 PyngOuin.py:483
 msgid "Comm"
 msgstr "Comm"
 
-#: PyngOuin.py:182 PyngOuin.py:195
+#: PyngOuin.py:171 PyngOuin.py:184
 msgid "exc"
 msgstr "Exclude"
 
-#: PyngOuin.py:218
+#: PyngOuin.py:209
 msgid "Modifier"
 msgstr "Modify"
 
-#: PyngOuin.py:226
+#: PyngOuin.py:217
 msgid "Délais entre 2 pings"
 msgstr "Delay between 2 pings"
 
-#: PyngOuin.py:234
+#: PyngOuin.py:225
 msgid "Nombre HS"
 msgstr "Number down"
 
-#: PyngOuin.py:240
+#: PyngOuin.py:231
 msgid "Popup"
 msgstr "Popup"
 
-#: PyngOuin.py:244
+#: PyngOuin.py:235
 msgid "Mail"
 msgstr "Mail"
 
-#: PyngOuin.py:248
+#: PyngOuin.py:239
 msgid "Telegram"
 msgstr "Telegram"
 
-#: PyngOuin.py:253 fichier/design.py:281
+#: PyngOuin.py:244 fichier/design.py:238
 msgid "Mail Recap"
 msgstr "Recap Mail"
 
-#: PyngOuin.py:258
+#: PyngOuin.py:249
 msgid "DB Externe"
 msgstr "External DB"
 
-#: fichier/Thread_aj_ip.py:43
+#: fichier/Thread_aj_ip.py:44
 msgid "L'adresse  "
 msgstr "The address  "
 
-#: fichier/Thread_aj_ip.py:108
+#: fichier/Thread_aj_ip.py:109
 msgid "Le scan est terminé"
 msgstr "The scan is complete"
 
-#: fichier/design.py:149
+#: fichier/design.py:130
 msgid "Votre plage IP à été enregistré"
 msgstr "Your IP range has been saved"
 
-#: fichier/design.py:269
+#: fichier/design.py:223
 msgid "Sauvegarder  ctrl+s"
 msgstr "Save ctrl+s"
 
-#: fichier/design.py:270
+#: fichier/design.py:224
 msgid "Ouvrir  ctrl+o"
 msgstr "Open ctrl+o"
 
-#: fichier/design.py:271
+#: fichier/design.py:225
 msgid "Charger"
 msgstr "Load"
 
-#: fichier/design.py:272
+#: fichier/design.py:226
 msgid "Tout effacer"
 msgstr "Clear all"
 
-#: fichier/design.py:274
-msgid "Test"
-msgstr "Test"
-
-#: fichier/design.py:275
+#: fichier/design.py:229
 msgid "Sauvegarder les réglages"
 msgstr "Save settings"
 
-#: fichier/design.py:276
+#: fichier/design.py:230
 msgid "Fichier"
 msgstr "File"
 
-#: fichier/design.py:279
+#: fichier/design.py:233
 msgid "Général"
 msgstr "General"
 
-#: fichier/design.py:280
+#: fichier/design.py:237
 msgid "Envoies"
 msgstr "Send"
 
-#: fichier/design.py:282
+#: fichier/design.py:239
 msgid "DB"
 msgstr "DB"
 
-#: fichier/design.py:283
+#: fichier/design.py:240
 msgid "Paramètres"
 msgstr "Settings"
 
-#: fichier/design.py:286
+#: fichier/design.py:243
 msgid "Export xls ctrl+x"
 msgstr "Export xls ctrl+x"
 
-#: fichier/design.py:287
+#: fichier/design.py:244
 msgid "Import xls ctrl+w"
 msgstr "Import xls ctrl+w"
 
-#: fichier/design.py:289
+#: fichier/design.py:246
 msgid "Fonctions"
 msgstr "Functions"
 
-#: fichier/design.py:292
+#: fichier/design.py:249
 msgid "A propos"
 msgstr "About"
 
-#: fichier/design.py:293
+#: fichier/design.py:250
 msgid "Changelog"
 msgstr "Changelog"
 
-#: fichier/design.py:294
+#: fichier/design.py:251
 msgid "Logs"
 msgstr "Logs"
 
-#: fichier/design.py:295
+#: fichier/design.py:252
 msgid "Effacer Logs"
 msgstr "Clear Logs"
 
-#: fichier/design.py:299
+#: fichier/design.py:256
 msgid "Gestion"
 msgstr "Management"
 
-#: fichier/design.py:305
+#: fichier/design.py:262
 msgid "Plugins"
 msgstr "Plugins"
 
-#: fichier/design.py:319 fichier/fct_main.py:32
+#: fichier/design.py:275 fichier/fct_main.py:32
 msgid "Attention"
 msgstr "Warning"
 
-#: fichier/design.py:319
+#: fichier/design.py:275
 msgid "Etes vous sur de vouloir effacer la liste ?"
 msgstr "Are you sure you want to clear the list?"
 
@@ -199,15 +203,15 @@ msgstr "Are you sure you want to clear the list?"
 msgid "Etes vous sur de vouloir quitter ?"
 msgstr "Are you sure you want to quit?"
 
-#: fichier/fct_thread.py:86
+#: fichier/fct_thread.py:84
 msgid "les hotes suivants sont HS : \n"
 msgstr "The following hosts are down: \n"
 
-#: fichier/fct_thread.py:89
+#: fichier/fct_thread.py:87
 msgid "les hotes suivants sont OK : \n"
 msgstr "The following hosts are OK: \n"
 
-#: fichier/fct_thread.py:107
+#: fichier/fct_thread.py:105
 msgid ""
 "\t\tBonjour,<br><br>\n"
 "\t\t<table border=1><tr><td width='50%' align=center>Nom</td><td width='50%' "
@@ -219,26 +223,41 @@ msgstr ""
 "width='50%' align=center>IP</td></tr>\n"
 "\t\t"
 
-#: fichier/fct_thread.py:111 fichier/fct_thread.py:165
-#: fichier/fct_thread.py:166
+#: fichier/fct_thread.py:109 fichier/fct_thread.py:162
+#: fichier/fct_thread.py:163
 msgid "Alerte sur le site "
 msgstr "Alert on the site "
 
-#: fichier/fct_thread.py:134
+#: fichier/fct_thread.py:131
 msgid "\t\t\tLes hôtes suivants sont <font color=red>HS</font><br>"
 msgstr "\t\t\tThe following hosts are <font color=red>down</font><br>"
 
-#: fichier/fct_thread.py:142
+#: fichier/fct_thread.py:132 fichier/fct_thread.py:140
+msgid ""
+"\t\t\t</table><br><br>\n"
+"\t\t\tCordialement,\n"
+"\t\t\t"
+msgstr ""
+"\t</table><br><br>\n"
+"\tBest regards,<br><br>\n"
+"\t<b>PyngOuin</b>\n"
+"\t"
+
+#: fichier/fct_thread.py:139
 msgid "\t\t\tLes hôtes suivants sont <font color=green>revenus</font><br>"
 msgstr "\t\t\tThe following hosts have <font color=green>recovered</font><br>"
 
-#: fichier/fct_thread.py:189
+#: fichier/fct_thread.py:185
 msgid "\t\t\t\t\t\t\tLes hôtes suivants sont HS \n"
 msgstr "\t\t\t\t\t\t\tThe following hosts are down \n"
 
-#: fichier/fct_thread.py:196
+#: fichier/fct_thread.py:192
 msgid "\t\t\t\t\t\t\tLes hôtes suivants sont revenus \n"
 msgstr "\t\t\t\t\t\t\tThe following hosts have recovered \n"
+
+#: fichier/param_db.py:60
+msgid "Paramètres DB"
+msgstr "Settings DataBases"
 
 #: fichier/param_db.py:65
 msgid "Adresse"
@@ -252,83 +271,113 @@ msgstr "Table"
 msgid "User"
 msgstr "User"
 
-#: fichier/param_db.py:77 fichier/param_mail.py:67
+#: fichier/param_db.py:77 fichier/param_mail.py:66
 msgid "Pass"
 msgstr "Pass"
 
-#: fichier/param_gene.py:78
+#: fichier/param_gene.py:82
+#, fuzzy
+#| msgid "Paramètres"
+msgid "Paramètres généraux"
+msgstr "Settings"
+
+#: fichier/param_gene.py:87
 msgid "Nom du site"
 msgstr "Site name"
 
-#: fichier/param_gene.py:82
+#: fichier/param_gene.py:94
+msgid "Langue"
+msgstr "Language"
+
+#: fichier/param_gene.py:100
 msgid "Code"
 msgstr "Code"
 
-#: fichier/param_gene.py:87
+#: fichier/param_gene.py:106
 msgid "Licence"
 msgstr "License"
 
-#: fichier/param_gene.py:93
+#: fichier/param_gene.py:113
 msgid "Licence Valide"
 msgstr "Valid License"
 
-#: fichier/param_gene.py:95
+#: fichier/param_gene.py:115
 msgid "Licence Non Valide"
 msgstr "Invalid License"
 
-#: fichier/param_mail.py:63
+#: fichier/param_mail.py:62
 msgid "Compte"
 msgstr "Account"
 
-#: fichier/param_mail.py:71
+#: fichier/param_mail.py:70
 msgid "Port"
 msgstr "Port"
 
-#: fichier/param_mail.py:75
+#: fichier/param_mail.py:74
 msgid "Serveur"
 msgstr "Server"
 
-#: fichier/param_mail.py:79
+#: fichier/param_mail.py:78
 msgid "Mail à envoyer"
 msgstr "Mail to send"
 
-#: fichier/param_mail.py:83
+#: fichier/param_mail.py:82
 msgid "ID Telegram"
 msgstr "Telegram ID"
 
-#: fichier/param_mail_recap.py:95
+#: fichier/param_mail_recap.py:93
 msgid "Heure (hh:mm)"
 msgstr "Time (hh:mm)"
 
-#: fichier/param_mail_recap.py:101
+#: fichier/param_mail_recap.py:99
 msgid "Lundi"
 msgstr "Monday"
 
-#: fichier/param_mail_recap.py:103
+#: fichier/param_mail_recap.py:101
 msgid "Mardi"
 msgstr "Tuesday"
 
-#: fichier/param_mail_recap.py:105
+#: fichier/param_mail_recap.py:103
 msgid "Mercredi"
 msgstr "Wednesday"
 
-#: fichier/param_mail_recap.py:107
+#: fichier/param_mail_recap.py:105
 msgid "Jeudi"
 msgstr "Thursday"
 
-#: fichier/param_mail_recap.py:109
+#: fichier/param_mail_recap.py:107
 msgid "Vendredi"
 msgstr "Friday"
 
-#: fichier/param_mail_recap.py:111
+#: fichier/param_mail_recap.py:109
 msgid "Samedi"
 msgstr "Saturday"
 
-#: fichier/param_mail_recap.py:113
+#: fichier/param_mail_recap.py:111
 msgid "Dimanche"
 msgstr "Sunday"
 
-#: fichier/thread_maj.py:47
+#: fichier/plugin/Temp/main.py:35
+msgid "Temp CPU "
+msgstr "temperature CPU"
+
+#: fichier/plugin/Temp/main.py:44
+msgid "Temp GPU "
+msgstr "temperature GPU"
+
+#: fichier/thread_maj.py:46
+msgid "Une mise à jour vers la version "
+msgstr "An update to the version "
+
+#: fichier/thread_maj.py:46
+msgid ""
+" est disponible. \n"
+" Voulez vous la télécharger ?"
+msgstr ""
+" is available. \n"
+" Would you like to download it?"
+
+#: fichier/thread_maj.py:48
 msgid "Mise à jour"
 msgstr "Update"
 
@@ -357,3 +406,6 @@ msgstr ""
 "\tBest regards,<br><br>\n"
 "\t<b>PyngOuin</b>\n"
 "\t"
+
+#~ msgid "Test"
+#~ msgstr "Test"

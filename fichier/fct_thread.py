@@ -37,7 +37,6 @@ def main():
                         design.logs("fct_thread -" + str(inst))
                 if var.mail == 1:
                     try:
-                        print("Thread Mail")
                         threading.Thread(target=mail, args=()).start()
                     except Exception as inst:
                         design.logs("fct_thread -" + str(inst))
@@ -49,7 +48,6 @@ def main():
 
 
             else:
-                print("stop")
                 break
         except Exception as inst:
             design.logs("fct_thread--" + str(inst))
@@ -112,7 +110,6 @@ def mail():
         time.sleep(1)
         for key1, value1 in var.liste_mail.items():
             if int(value1) == int(var.envoie_alert):
-                print(str(int(value1)) + " - " + str(int(var.envoie_alert)))
                 nom = design.lire_nom(key1)
                 p1 = "<tr><td align=center>" + nom + "</td><td bgcolor=" + var.couleur_noir + " align=center>" + key1 + "</td></tr>"
                 ip_hs1 = ip_hs1 + p1
@@ -132,7 +129,7 @@ def mail():
         if len(ip_hs1) > 0:
             mess = 1
             message = message + _("""\
-			Les hôtes suivants sont <font color=red>HS</font><br>""" + ip_hs1 + """\
+			Les hôtes suivants sont <font color=red>HS</font><br>""") + ip_hs1 + _("""\
 			</table><br><br>
 			Cordialement,
 			""")
@@ -140,7 +137,7 @@ def mail():
         if len(ip_ok1) > 0:
             mess = 1
             message = message + _("""\
-			Les hôtes suivants sont <font color=green>revenus</font><br>""" + ip_ok1 + """\
+			Les hôtes suivants sont <font color=green>revenus</font><br>""") + ip_ok1 + _("""\
 			</table><br><br>
 			Cordialement,
 			""")
@@ -178,7 +175,6 @@ def telegram():
                 ip_ok1 = ip_ok1 + p1
                 erase = erase + (str(key1),)
         for cle in erase:
-            print(cle)
             try:
                 del var.liste_telegram[cle]
             except:

@@ -31,7 +31,6 @@ def question_box(title, message):
 
 def affilogs():
     path = os.path.dirname(os.path.abspath(os.path.join(__file__, os.pardir)))
-    print(path + "/log.log")
     os.startfile(path + "/log.log")
 
 def effalogs():
@@ -65,11 +64,6 @@ def rac_w(ev=None):
         logs("design - " + str(e))
 
 
-"""def rac_f(ev=None):
-    try:
-        pluginSnyf()
-    except Exception as e:
-        logs("design - " + str(e))"""
 
 
 def fenAPropos():
@@ -89,21 +83,10 @@ def fenAChangelog():
 
 
 def xlsImport():
-    # try:
     thread_xls.openExcel()
 
-
-# except Exception as e:
-#	logs("design - " + str(e))
-
 def xlsExport():
-    # try:
     thread_xls.saveExcel()
-
-
-# except Exception as e:
-#	logs("design - " + str(e))
-
 
 
 def test():
@@ -207,79 +190,35 @@ def logs(message):
         log_file.write(message + "\n")
 
 
-def logs(message):
-    """Fonction simple pour enregistrer les logs."""
-    with open("plugin_logs.txt", "a") as log_file:
-        log_file.write(message + "\n")
-
 
 def plugIn(plugin_name):
-    """
-    Charge et exécute dynamiquement un plugin Python.
 
-    :param plugin_name: Nom du plugin à charger (doit correspondre au nom du dossier dans 'plugin/')
-    """
-    print(f"Tentative de chargement du plugin : {plugin_name}")
-    #try:
-    # Configuration du chemin vers le dossier des plugins (au même niveau que l'exécutable principal)
     base_dir = os.path.dirname(os.path.abspath(__file__))  # Répertoire contenant main.py
     plugin_root = os.path.join(base_dir, 'plugin')  # Dossier plugin au même niveau
-
-    # Vérification que le dossier 'plugin' existe
     if not os.path.exists(plugin_root):
         raise FileNotFoundError(f"Le dossier 'plugin' est introuvable : {plugin_root}")
-
-    # Ajout du dossier 'plugin' au PYTHONPATH si nécessaire
     if plugin_root not in sys.path:
         sys.path.insert(0, plugin_root)
-
-    # Construction du chemin complet vers le fichier main.py du plugin
     plugin_dir = os.path.join(plugin_root, plugin_name)
     full_path_to_module = os.path.join(plugin_dir, 'main.py')
 
     if not os.path.exists(full_path_to_module):
         raise FileNotFoundError(f"Le fichier main.py est introuvable dans le dossier : {plugin_dir}")
-
-    print(f"Chemin du module détecté : {full_path_to_module}")
-
-    # Génération d'un nom unique pour le module
     module_name = f"plugin_{plugin_name}_main"
-
-    # Chargement dynamique du module
     spec = importlib.util.spec_from_file_location(module_name, full_path_to_module)
     if spec is None:
         raise ImportError("Impossible de créer la spécification du module.")
-
     module = importlib.util.module_from_spec(spec)
     sys.modules[module_name] = module  # Nécessaire pour les imports relatifs dans le plugin
     spec.loader.exec_module(module)
-
-    # Vérification et exécution de la fonction main() du plugin
     if hasattr(module, 'main'):
-        print(f"Exécution de la fonction main() du plugin {plugin_name}")
         module.main()
     else:
         raise AttributeError(f"La fonction main() est introuvable dans le module {module_name}.")
 
-    """except Exception as e:
-        error_message = f"Erreur lors du chargement ou de l'exécution du plugin '{plugin_name}': {str(e)}"
-        print(error_message)
-        logs(error_message)"""
-
-
-"""def pluginSnyf():
-    try:
-        import plugin.Snyf.main as apropos
-        apropos.main()
-    except Exception as e:
-        print(e)
-        logs("design - " + str(e))"""
 #  Menu
 def create_menu(fenetre, frame_haut):
     menubar = Menu(fenetre)
-
-
-
     menu1 = Menu(menubar, tearoff=0)
     menu1.add_command(label=_("Sauvegarder  ctrl+s"), command=save_csv)
     menu1.add_command(label=_("Ouvrir  ctrl+o"), command=load_csv)

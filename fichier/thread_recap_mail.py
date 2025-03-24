@@ -79,16 +79,13 @@ def main():
 					jour = str(d.weekday())
 					heure = d.strftime('%H:%M')
 					for x in j:
-						print(x)
 						if str(x) == jour:
 							if str(heure) == str(heureDemande):
 								a = True
-					print(a)
 					if a == True:
 						prepaMail()
 					time.sleep(60)
 			else:
-				print("stop")
 				return
 		except Exception as inst:
 			design.logs("thread_recap - " + str(inst))

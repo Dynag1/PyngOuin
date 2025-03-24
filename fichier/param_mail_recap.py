@@ -38,7 +38,6 @@ def main():
 		param_mail_ven = str(cven.get())
 		param_mail_sam = str(csam.get())
 		param_mail_dim = str(cdim.get())
-		print(clun.get())
 		variables = [param_mail_heure, param_mail_lun, param_mail_mar, param_mail_merc, param_mail_jeu, param_mail_ven, param_mail_sam, param_mail_dim]
 		try:
 			fichierSauvegarde = open("tabr","wb")
@@ -52,7 +51,6 @@ def main():
 	def lire():
 		try:
 			variables=lire_param_mail()
-			print(variables)
 			ent0.insert(0, variables[0])
 			if variables[1] == "1":
 				clun=1

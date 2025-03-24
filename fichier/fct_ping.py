@@ -150,7 +150,6 @@ def test_ping(ip):
 
 
         message = message + "\n"
-        print("fin test")
         if var.db == 1:
             var.q.put(lambda: db_ext(ip, nom, etat, latence))
         if suivi == "X":
@@ -179,33 +178,6 @@ def worker():
         design.logs("fct_ping - " + str(e))
 
 
-
-"""def workerPing(task):
-
-    print("Worker exécute la tâche :",task)"""
-###########################################################################################
-#####				Création des workers et mise en liste des tâches     			  #####
-###########################################################################################
-
-"""def testPing():
-    tasks = queue.Queue()
-    tasks.empty()
-    pool2 = Pool(processes=4)
-
-    for parent in var.app_instance.tab_ip.get_children():
-        result = var.app_instance.tab_ip.item(parent)["values"]
-        ip1 = result[0]
-        tasks.put(test_ping(str(ip1)))
-        # tasks.put(ip1)
-    pool2.apply_async(workerPing, tasks)
-
-    # Fermer la pool de workers
-    print("close")
-    pool2.close()
-    print("closeOK")
-    #pool2.join()
-    print("closeOK1")"""
-
 def test2():
 
     for parent in var.app_instance.tab_ip.get_children():
@@ -218,7 +190,6 @@ def threadPing():
     param_gene.nom_site()
     cpus = multiprocessing.cpu_count()
     cpu = cpus/2 # Detect number of cores
-    print("Creating %d threads" % cpu)
     for i in range(int(cpu)):
         t = threading.Thread(target=worker)
         t.daemon = True
@@ -247,64 +218,6 @@ def threadPing():
             #print(e)
             pass
 
-
-"""def threadPing1():
-    param_gene.nom_site()
-    if var.db == 1:
-        try:
-            mysql.create_table(var.nom_site)
-        except:
-            pass
-    while True:
-        try:
-            if var.db == 1:
-                try:
-                    mysql.vider_table(var.nom_site)
-                except:
-                    pass
-            startfct = time.time() * 1000.0
-
-            startfct = time.time() * 1000.0
-            if var.ipPing == 1:
-                nbrworker = multiprocessing.cpu_count()
-                if nbrworker > 1:
-                    nbrworker = 1
-
-                num_worker_threads = nbrworker
-                q = queue.Queue()
-                threads = []
-                for i in range(num_worker_threads):
-                    t = threading.Thread(target=worker, args=(q, i,), daemon=True)
-                    t.start()
-                    threads.append(t)
-                i = 0
-                for parent in var.app_instance.tab_ip.get_children():
-                    result = var.app_instance.tab_ip.item(parent)["values"]
-                    ip1 = result[0]
-                    q.put(ip1)
-                # block until all tasks are done
-                q.join()
-                # stop workers
-                for i in range(num_worker_threads):
-                    q.put(None)
-                for t in threads:
-                    t.join()
-
-                stopfct = time.time() * 1000.0
-                tpsfct = (stopfct - startfct) / 1000
-
-                if tpsfct < int(var.delais):
-                    time.sleep(int(var.delais) - tpsfct)
-                else:
-                    pass
-            else:
-                print("STOP")
-                break
-
-        except Exception as e:
-            design.logs("fct_ping - " + str(e))
-
-"""
 ###########################################################################################
 #####				Gestion du bouton ping, lancer ou arrêter les pings				  #####
 ###########################################################################################

@@ -9,7 +9,6 @@ import fichier.design as design
 
 
 def envoie_mail(messageRecep, sujet):
-	print("Mail Envoie - 001")
 	variables = param_mail.lire_param_mail()
 
 	destinateur = variables[0]
@@ -36,10 +35,8 @@ def envoie_mail(messageRecep, sujet):
 		context = ssl.create_default_context()
 	except Exception as inst:
 		log = design.logs("fct_tread_mail"+inst)
-		print(inst)
 		print(log)
 		return
-	print("Test envoie mail")
 	try:
 		with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
 			server.login(destinateur, password)

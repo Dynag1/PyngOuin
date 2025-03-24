@@ -50,7 +50,6 @@ def create_table(table):
     try:
         execute_query(create_teacher_table)
     except Exception as inst:
-        print(inst)
         design.logs("MySql - create_table - "+str(inst))
 
 def vider_table(table):

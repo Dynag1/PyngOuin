@@ -57,7 +57,7 @@ def main():
 		return
 
 	fenetre1 = Toplevel()
-	fenetre1.title("Paramètres DB")
+	fenetre1.title(_("Paramètres DB"))
 	fenetre1.geometry("400x400")
 	frame_haut = Frame(master=fenetre1, height=50, bg=var.bg_frame_mid, padx=5, pady=5)
 	frame_haut.pack(fill=X)

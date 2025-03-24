@@ -62,7 +62,6 @@ def ipPing(ip):
 		if result.rtt_avg_ms == int(2000):
 			return "HS"
 		else:
-			print("test" + ip + "ok")
 			return "OK"
 
 	except Exception as inst:
