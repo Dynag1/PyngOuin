@@ -65,6 +65,7 @@ def main():
 		except Exception as inst:
 			design.logs("param_gene - "+str(inst))
 		fenetre1.destroy()
+		var.app_instance.reload_all()
 		return
 	def lire():
 		try:

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import sys
 
 from fichier import design, var, fct_ip, fct_ping, param_gene, Thread_aj_ip, fct_main, param_db_quit, fct_suivi, fct_graph, lic
 import gettext
@@ -274,17 +275,35 @@ class main:
         self.fenetre.protocol("WM_DELETE_WINDOW", self.Intercepte)
 
 
+
+
     def get_lang(self):
         try:
+            # Détection du chemin de base (normal ou depuis un exécutable PyInstaller)
+            if getattr(sys, 'frozen', False):  # Vérifie si le script est exécuté depuis un exe
+                base_path = sys._MEIPASS
+            else:
+                base_path = os.getcwd()
+
+            # Récupération de la langue via param_gene
             langue = param_gene.lang()
             var.langue = langue
-            gettext.find("PyngOuin")
-            traduction = gettext.translation(var.langue, localedir='fichier/locale', languages=[var.langue])
-            traduction.install()
-        except:
-            gettext.install('PyngOuin')
-            print("error")
 
+            # Chemin vers le dossier contenant les fichiers de traduction
+            localedir = os.path.join(base_path, 'fichier/locale')
+
+            # Chargement des traductions
+            traduction = gettext.translation(var.langue, localedir=localedir, languages=[var.langue])
+            traduction.install()
+
+        except Exception as e:
+            # Gestion des erreurs : affichage d'un message d'erreur et fallback sur gettext par défaut
+            error_message = f"Error: {str(e)}"
+            design.alert(error_message)  # Affiche l'erreur dans l'interface utilisateur
+            print(error_message)  # Affiche l'erreur dans la console
+
+            # Fallback : installation de gettext sans fichier de traduction spécifique
+            gettext.install('PyngOuin')
 
     def plugin(name):
         result = 0
@@ -554,6 +573,13 @@ class main:
         elif self.check_db1.get() == 0:
             var.db = 0
 
+    def reload_all(self):
+        self.fenetre.destroy()
+
+        root = tk.Tk()
+        page_principale = main(root)
+        root.protocol("WM_DELETE_WINDOW", quitter)
+        root.mainloop()
 
 
 ###################################################################################################################
