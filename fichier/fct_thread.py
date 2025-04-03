@@ -183,16 +183,12 @@ def telegram():
         if len(ip_hs1) > 0:
             mess = 1
             message = message + _("""\
-							Les hôtes suivants sont HS \n""" + ip_hs1 + """\
-	
-							""")
+							Les hôtes suivants sont HS \n""") + ip_hs1
 
         if len(ip_ok1) > 0:
             mess = 1
             message = message + _("""\
-							Les hôtes suivants sont revenus \n""" + ip_ok1 + """\
-	
-							""")
+							Les hôtes suivants sont revenus \n""") + ip_ok1
         if mess == 1:
             threading.Thread(target=thread_telegram.main, args=(message,)).start()
             mess = 0

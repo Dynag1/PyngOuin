@@ -45,11 +45,7 @@ class main:
         self.fenetre.title("PyngOuin")
         self.fenetre.geometry("910x600")
         self.fenetre.minsize(width=910, height=600)
-        fct_main.creerDossier("bd")
-        fct_main.creerDossier("fichier")
-        fct_main.creerDossier("fichier/plugin")
         self.lireParam()
-        var.nom_site = param_gene.nom_site()
         ip_pc = fct_ip.recup_ip()
         self.get_lang()
         self.plug()
@@ -67,7 +63,6 @@ class main:
             design.logs("MAJ - " + str(e))
             pass
         threading.Thread(target=queu, args=()).start()
-        # threading.Thread(target=threado, args=()).start()
         ###################################################################################################################
         ###### Définition des frames																				 ######
         ###################################################################################################################
@@ -91,7 +86,7 @@ class main:
         self.lab_touvert.grid(row=0, column=2, padx=5, pady=5)
         if lic.verify_license() == True:
             self.lab_lic = Label(master=self.frame_bas, bg=var.bg_frame_haut,
-                                     text=_("Votre licence est active, il vous reste "+lic.jours_restants_licence()+" jours"))
+                                     text=_("Votre licence est active, il vous reste ")+lic.jours_restants_licence()+_(" jours"))
             self.lab_lic.grid(row=0, column=10, padx=5, pady=5)
         else:
             self.lab_lic = Label(master=self.frame_bas, bg=var.bg_frame_haut,
@@ -116,10 +111,13 @@ class main:
         self.lab_pourcent = Label(master=self.frame_haut, text="", bg=var.bg_frame_haut)
         self.lab_pourcent.grid(row=0, column=3, padx=5, pady=5)
         self.lab_pourcent.grid_forget()
-        self.lab_nom_site = Label(master=self.frame_haut, text="", bg=var.bg_frame_haut)
+        self.lab_nom_site = Label(
+            master=self.frame_haut,
+            text=var.nom_site,
+            bg=var.bg_frame_haut,
+            font=("Arial", 16)  # Spécifiez une police et une taille ici
+        )
         self.lab_nom_site.grid(row=0, column=4, padx=5, pady=5)
-        self.lab_nom_site.config(text=var.nom_site)
-
         ###################################################################################################################
         ###### Frame centrale 																						 ######
         ###################################################################################################################
@@ -150,9 +148,10 @@ class main:
         self.ent_hote.grid(row=3, column=0, padx=5, pady=5)
         self.ent_hote.insert(0, "255")
         self.ent_tout = ttk.Combobox(master=self.frameIp, values=[
-            "Tout",
-            "Alive"], width=18)
-        self.ent_tout.set("Tout")
+            _("Tout"),
+            _("Actif"),
+            _("Site")], width=18)
+        self.ent_tout.set(_("Actif"))
         self.ent_tout.grid(row=4, column=0, padx=5, pady=5, columnspan=2)
 
         self.lab_port = Label(master=self.frameIp, text=_("Ports (xx,xx)"), bg="#FFFFFF")
@@ -253,7 +252,6 @@ class main:
         self.check_db.grid(row=7, columnspan=3, padx=0, pady=5, sticky='w')
 
         if lic.verify_license() == False:
-            self.check_popup.config(state=DISABLED)
             self.check_mail.config(state=DISABLED)
             self.check_telegram.config(state=DISABLED)
             self.check_recap.config(state=DISABLED)
@@ -336,9 +334,13 @@ class main:
             var.mail = variable[3]
             var.telegram = variable[4]
             var.recap = variable[5]
+            param_gene.nom_site()
         except:
             pass
 
+        fct_main.creerDossier("bd")
+        fct_main.creerDossier("fichier")
+        fct_main.creerDossier("fichier/plugin")
 
     def histo(self):
         selected_item = self.tab_ip.selection()[0]

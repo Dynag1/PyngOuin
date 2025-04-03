@@ -4,8 +4,9 @@ from tkinter import *
 from tkinter import ttk
 from queue import Queue
 
-version = "2.2.8"
+version = "2.2.9"
 site = 'http://prog.dynag.co'
+logiciel = "PyngOuin"
 ###########   Couleurs ##########
 bg_frame_haut = "#81BEF7"
 bg_frame_mid = "#A9D0F5"

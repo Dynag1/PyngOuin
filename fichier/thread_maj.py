@@ -10,12 +10,10 @@ import subprocess
 
 def getxml():
     try:
-        print("maj1")
-        url = var.site + "/PyngOuin/changelog.xml"
+        url = var.site + "/"+var.logiciel+"/changelog.xml"
         http = urllib3.PoolManager(cert_reqs='CERT_NONE')
         response = http.request('GET', url)
         data = xmltodict.parse(response.data)
-        print("maj2")
         return data
 
     except Exception as e:
@@ -46,8 +44,8 @@ def recupDerVer():
 
 def download_new_version(version):
     try:
-        exe_url = f"{var.site}/PyngOuin/PyngOuin.exe"  # URL du fichier .exe à télécharger
-        temp_path = os.path.join(os.getcwd(), "PyngOuin_new.exe")  # Chemin temporaire pour la nouvelle version
+        exe_url = f"{var.site}/"+var.logiciel+"/"+var.logiciel+".exe"  # URL du fichier .exe à télécharger
+        temp_path = os.path.join(os.getcwd(), ""+var.logiciel+"_new.exe")  # Chemin temporaire pour la nouvelle version
 
         # Télécharger le fichier .exe
         response = requests.get(exe_url, stream=True)
@@ -68,7 +66,7 @@ def download_new_version(version):
 def launch_updater(new_exe_path):
     try:
         updater_path = os.path.join(os.getcwd(), "updater.exe")
-        current_exe = os.path.join(os.getcwd(), "PyngOuin.exe")
+        current_exe = os.path.join(os.getcwd(), ""+var.logiciel+".exe")
 
         # Lancer updater.exe avec les chemins en arguments
         subprocess.Popen([

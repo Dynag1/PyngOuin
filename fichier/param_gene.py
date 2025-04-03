@@ -44,7 +44,7 @@ def nom_site():
 def lang():
 	try:
 		param = lire_param_gene()
-		langue = var.nom_site=param[2]
+		langue = param[2]
 	except Exception as inst:
 		langue = "en"
 		design.logs("param_gene - "+str(inst))

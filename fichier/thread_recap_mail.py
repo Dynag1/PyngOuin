@@ -35,13 +35,12 @@ def jour_demande():
 
 def prepaMail():
 	sujet = _("""\
-	Compte rendu du site """+var.nom_site+"""
-	""")
+	Compte rendu du site """)+var.nom_site
 	message = _("""\
 	Bonjour,<br><br>
 	Voici le compte rendu des équipements sous surveillance : <br><br>
-	<table width=50%><tr><td bgcolor="""+var.bg_frame_haut+""">Nom</td><td bgcolor="""+var.bg_frame_haut+""">IP</td>
-	<td  bgcolor="""+var.bg_frame_haut+""">Latence</tr>
+	<table width=50%><tr><td bgcolor=""")+var.bg_frame_haut+_(""">Nom</td><td bgcolor=""")+var.bg_frame_haut+_(""">IP</td>
+	<td  bgcolor=""")+var.bg_frame_haut+_(""">Latence</tr>
 	""")
 	for row_id in var.app_instance.tab_ip.get_children():
 		result = var.app_instance.tab_ip.item(row_id)["values"]

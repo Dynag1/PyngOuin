@@ -9,10 +9,8 @@ import queue
 
 
 
-
-
 ################s###########################################################################
-#####   Fonction principale d'ajout de ip.pin   										  #####
+#####   Fonction principale d'ajout de ip.pin   				    				  #####
 ###########################################################################################
 
 def labThread(value):
@@ -29,8 +27,6 @@ def worker(q, thread_no):
         design.logs("fct_ping - " + str(e))
 
 
-
-
 def threadIp(ip, tout, i, hote, port):
     var.app_instance.progress.grid(row=0, column=2, padx=5, pady=5)
     var.threadouvert = int(var.threadouvert) + 1
@@ -38,10 +34,8 @@ def threadIp(ip, tout, i, hote, port):
     for parent in var.app_instance.tab_ip.get_children():
         result = var.app_instance.tab_ip.item(parent)["values"]
         ip1 = result[0]
-
-
         if ip1 == ip:
-            threading.Thread(target=design.alert, args=(_("L'adresse  " + ip + " existe déja"),)).start()
+            threading.Thread(target=design.alert, args=(_("L'adresse  ") + ip + _(" existe déja"),)).start()
             ipexist = True
             pass
         else:
@@ -53,7 +47,7 @@ def threadIp(ip, tout, i, hote, port):
         nom = ("")
         mac = ""
 
-        if tout == "Tout":
+        if tout == _("Tout"):
             if result == "OK":
                 try:
                     nom = fct_ip.socket.gethostbyaddr(ip)
@@ -74,6 +68,8 @@ def threadIp(ip, tout, i, hote, port):
                 var.app_instance.tab_ip.insert(parent='', index=i, iid=ip, tag=ip, values=(ip, nom[0], mac, port, ""))
             except:
                 pass
+        elif tout == _("Site"):
+            var.app_instance.tab_ip.insert(parent='', index=i, iid=ip, tag=ip, values=(ip, ip, "", "", ""))
         else:
             if result == "OK":
                 try:
@@ -101,7 +97,6 @@ def threadIp(ip, tout, i, hote, port):
 
     progre = ((int(hote) - int(thread)) / int(hote)) * 100
     var.app_instance.progress['value'] = progre
-    #var.q.put(lambda: var.app_instance.progress(progre))
 
     if thread <= 0:
         var.q.put(lambda: var.app_instance.progress.grid_forget())
@@ -133,22 +128,25 @@ def aj_ip(ip, hote, tout, port, mac):
         q.put(None)
     for t in threads:
         t.join()
+    if tout != _("Site"):
+        ip1 = ip.split(".")
+        u = 0
+        i = 0
+        if int(hote) > 500:
+            return
+        while i < int(hote):
+            ip2 = ip1[0] + "." + ip1[1] + "."
+            ip3 = int(ip1[3]) + i
 
-    ip1 = ip.split(".")
-    u = 0
-    i = 0
-    if int(hote) > 500:
-        return
-    while i < int(hote):
-        ip2 = ip1[0] + "." + ip1[1] + "."
-        ip3 = int(ip1[3]) + i
-
-        i = i + 1
-        if int(ip3) <= 255:
-            ip2 = ip2 + ip1[2] + "." + str(ip3)
-        else:
-            ip4 = int(ip1[2]) + 1
-            ip2 = ip2 + str(ip4) + "." + str(u)
-            u = u + 1
-        t = i
+            i = i + 1
+            if int(ip3) <= 255:
+                ip2 = ip2 + ip1[2] + "." + str(ip3)
+            else:
+                ip4 = int(ip1[2]) + 1
+                ip2 = ip2 + str(ip4) + "." + str(u)
+                u = u + 1
+            t = i
+            q.put(threading.Thread(target=threadIp, args=(ip2, tout, i, hote, port)).start())
+    else:
+        ip2=ip
         q.put(threading.Thread(target=threadIp, args=(ip2, tout, i, hote, port)).start())
